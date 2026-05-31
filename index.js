@@ -135,6 +135,38 @@ client.on("interactionCreate", async (interaction) => {
       });
     }
   }
+  if (interaction.commandName === "removegame") {
+    const channel = interaction.options.getChannel("salon");
+
+    const guildConfig = config[guildId];
+
+    if (!guildConfig?.games?.[channel.id]) {
+      return interaction.reply({
+        content: "Ce salon n'est pas enregistré comme salon créateur.",
+        ephemeral: true,
+      });
+    }
+
+    delete guildConfig.games[channel.id];
+
+    saveConfig(config);
+
+    try {
+      await channel.delete("Jeu supprimé");
+
+      return interaction.reply({
+        content: "Jeu supprimé ✅",
+        ephemeral: true,
+      });
+    } catch (error) {
+      console.error(error);
+
+      return interaction.reply({
+        content: "Impossible de supprimer le salon.",
+        ephemeral: true,
+      });
+    }
+  }
 });
 
 client.on("voiceStateUpdate", async (oldState, newState) => {

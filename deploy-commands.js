@@ -34,6 +34,17 @@ const commands = [
         .setDescription("Emoji du jeu, ex: 🎮")
         .setRequired(false),
     ),
+
+  new SlashCommandBuilder()
+    .setName("removegame")
+    .setDescription("Supprime un salon créateur")
+    .addChannelOption((option) =>
+      option
+        .setName("salon")
+        .setDescription("Salon créateur à supprimer")
+        .addChannelTypes(ChannelType.GuildVoice)
+        .setRequired(true),
+    ),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
