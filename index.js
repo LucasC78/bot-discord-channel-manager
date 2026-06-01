@@ -208,6 +208,9 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
   if (oldState.channel) {
     const oldChannel = oldState.channel;
 
+    // Ne jamais supprimer un salon créateur
+    if (games[oldChannel.id]) return;
+
     if (!tempChannels.has(oldChannel.id)) return;
 
     if (oldChannel.members.size === 0) {
