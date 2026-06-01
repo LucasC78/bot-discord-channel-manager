@@ -208,8 +208,11 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
   if (oldState.channel) {
     const oldChannel = oldState.channel;
 
-    // Ne jamais supprimer un salon créateur
+    // Ne jamais supprimer un salon créateur enregistré
     if (games[oldChannel.id]) return;
+
+    // Sécurité supplémentaire : ne jamais supprimer un salon "Créer ton vocal"
+    if (oldChannel.name.includes("Créer ton vocal")) return;
 
     if (!tempChannels.has(oldChannel.id)) return;
 
