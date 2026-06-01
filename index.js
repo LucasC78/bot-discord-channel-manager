@@ -228,4 +228,8 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
   }
 });
 
+client.on("channelDelete", (channel) => {
+  console.log(`CHANNEL DELETE DETECTED : ${channel.name} | ID: ${channel.id}`);
+});
+
 client.login(process.env.DISCORD_TOKEN);
