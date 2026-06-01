@@ -212,7 +212,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (games[oldChannel.id]) return;
 
     // Sécurité supplémentaire : ne jamais supprimer un salon "Créer ton vocal"
-    if (oldChannel.name.includes("Créer ton vocal")) return;
+    if (oldChannel.name.toLowerCase().includes("créer ton vocal")) return;
 
     if (!tempChannels.has(oldChannel.id)) return;
 
